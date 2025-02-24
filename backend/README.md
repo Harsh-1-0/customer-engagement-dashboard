@@ -411,7 +411,7 @@ This document describes the API endpoints used to retrieve user engagement score
 ### **Endpoint:**
 
 ```http
-GET /engagement-score
+GET users/engagement-score
 ```
 
 ### **Description:**
@@ -469,7 +469,7 @@ Returns a JSON response containing an array of engagement scores for all users.
 ### **Endpoint:**
 
 ```http
-GET /engagement-scores
+GET users/engagement-scores
 ```
 
 ### **Description:**
@@ -591,9 +591,9 @@ Returns a JSON array of daily active user counts.
 
 ## **Notes:**
 
-- The `/engagement-score` route dynamically calculates the engagement scores and updates the database.
-- The `/engagement-scores` route simply retrieves already stored scores without recalculating.
-- The `/retention-trends` and `/active-users-overtime` routes help track user engagement trends over time.
+- The `users/engagement-score` route dynamically calculates the engagement scores and updates the database.
+- The `users/engagement-scores` route simply retrieves already stored scores without recalculating.
+- The `users/retention-trends` and `users/active-users-overtime` routes help track user engagement trends over time.
 - The scores are calculated using a weighted formula that considers multiple engagement factors.
 
 For more details on engagement scoring methodology, refer to the `EngagementScoring` class in `engagement.js`. 🚀
@@ -601,15 +601,18 @@ For more details on engagement scoring methodology, refer to the `EngagementScor
 # Churn Prediction and User Insights API
 
 ## Overview
+
 This API provides endpoints for predicting user churn risk and generating user engagement insights. It analyzes user activity, engagement trends, and session durations to determine churn risk levels.
 
 ## Endpoints
 
 ### 1. `GET users/churn-prediction`
+
 **Description:**
 This route calculates churn risk levels for users based on their engagement metrics.
 
 **Process:**
+
 - Fetches all users from the database.
 - Calculates engagement metrics using `calculateUserMetrics`.
 - Determines risk level using `determineRiskLevel`.
@@ -618,6 +621,7 @@ This route calculates churn risk levels for users based on their engagement metr
 - Returns risk summary statistics.
 
 **Response Example:**
+
 ```json
 {
   "riskData": {
@@ -637,10 +641,12 @@ This route calculates churn risk levels for users based on their engagement metr
 ```
 
 ### 2. `GET users/user-insights`
+
 **Description:**
 This route provides detailed user engagement insights and churn predictions.
 
 **Process:**
+
 - Fetches all users.
 - Computes engagement scores using `EngagementScoring.calculateEngagementScore`.
 - Calculates key metrics using `calculateUserMetrics`.
@@ -648,6 +654,7 @@ This route provides detailed user engagement insights and churn predictions.
 - Returns insights for each user.
 
 **Response Example:**
+
 ```json
 {
   "insights": [
@@ -673,7 +680,9 @@ This route provides detailed user engagement insights and churn predictions.
 ## Functions
 
 ### 1. `calculateUserMetrics(user, now)`
+
 **Purpose:** Computes user engagement metrics including:
+
 - Days since last login
 - Average session duration
 - Engagement trend
@@ -681,26 +690,29 @@ This route provides detailed user engagement insights and churn predictions.
 - Risk score
 
 ### 2. `calculateRiskScore(metrics)`
+
 **Purpose:** Assigns a churn risk score (0-100) based on:
+
 - Login recency (40%)
 - Session duration trend (30%)
 - Account activity (30%)
 
 ### 3. `determineRiskLevel(metrics)`
+
 **Purpose:** Categorizes users into:
+
 - `Low` (score < 40)
 - `Medium` (40 ≤ score < 70)
 - `High` (score ≥ 70)
 
 ### 4. `identifyRiskFactors(metrics)`
+
 **Purpose:** Identifies risk factors such as:
+
 - Long inactivity periods
 - Declining engagement trends
 - Short session durations
 
-
-
 ## Author
+
 Harsh Kumar Sinha
-
-
