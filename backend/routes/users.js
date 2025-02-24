@@ -175,6 +175,8 @@ router.get("/engagement-scores", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+
 router.get("/retention-trends", async (req, res) => {
   try {
     const data = await userModel.aggregate([
@@ -191,6 +193,8 @@ router.get("/retention-trends", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+
 router.get("/churn-prediction", async (req, res) => {
   try {
     const now = new Date();

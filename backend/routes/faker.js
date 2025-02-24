@@ -1,7 +1,5 @@
 import { faker } from "@faker-js/faker";
 import userModel from "../model/userModel.js"; // Adjust path if needed
-import dotenv from "dotenv";
-dotenv.config();
 import configDB from "../config/mongodb.js";
 import express from "express";
 import bcrypt from "bcrypt";
